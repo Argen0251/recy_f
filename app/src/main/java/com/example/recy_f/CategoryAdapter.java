@@ -1,15 +1,15 @@
 package com.example.recy_f;
+
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.recy_f.databinding.ItemCatagoryBinding;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+
     private Context context;
     private List<category> categories;
 
@@ -21,15 +21,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_catagory, parent, false);
-        return new CategoryViewHolder(view);
+        ItemCatagoryBinding binding = ItemCatagoryBinding.inflate(LayoutInflater.from(context), parent, false);
+        return new CategoryViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        category category = categories.get(position);
-        holder.icon.setImageResource(category.getIcon());
-        holder.name.setText(category.getName());
+        category categoryItem = categories.get(position);
+
+        holder.binding.categoryIcon.setImageResource(categoryItem.getIcon());
+        holder.binding.categoryName.setText(categoryItem.getName());
     }
 
     @Override
@@ -38,13 +39,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        ImageView icon;
-        TextView name;
+        ItemCatagoryBinding binding;
 
-        public CategoryViewHolder(@NonNull View itemView) {
-            super(itemView);
-            icon = itemView.findViewById(R.id.categoryIcon);
-            name = itemView.findViewById(R.id.categoryName);
+        public CategoryViewHolder(@NonNull ItemCatagoryBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

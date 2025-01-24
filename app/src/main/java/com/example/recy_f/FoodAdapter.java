@@ -2,12 +2,10 @@ package com.example.recy_f;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.recy_f.databinding.ItemFoodBinding;
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
@@ -23,17 +21,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     @NonNull
     @Override
     public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_food, parent, false);
-        return new FoodViewHolder(view);
+        ItemFoodBinding binding = ItemFoodBinding.inflate(LayoutInflater.from(context), parent, false);
+        return new FoodViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         food foodItem = foods.get(position);
 
-        holder.image.setImageResource(foodItem.getImage());
-        holder.name.setText(foodItem.getName());
-        holder.price.setText(foodItem.getPrice());
+        holder.binding.foodImage.setImageResource(foodItem.getImage());
+        holder.binding.foodName.setText(foodItem.getName());
+        holder.binding.foodPrice.setText(foodItem.getPrice());
     }
 
     @Override
@@ -42,15 +40,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     }
 
     public static class FoodViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
-        TextView name, price;
+        ItemFoodBinding binding;
 
-        public FoodViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            image = itemView.findViewById(R.id.foodImage);
-            name = itemView.findViewById(R.id.foodName);
-            price = itemView.findViewById(R.id.foodPrice);
+        public FoodViewHolder(@NonNull ItemFoodBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

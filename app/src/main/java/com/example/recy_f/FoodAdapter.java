@@ -6,32 +6,26 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.recy_f.databinding.ItemFoodBinding;
-import java.util.List;
+import java.util.ArrayList;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
-    private Context context;
-    private List<food> foods;
+    private ArrayList<food> foods;
 
-    public FoodAdapter(Context context, List<food> foods) {
-        this.context = context;
+    public FoodAdapter(ArrayList<food> foods) {
         this.foods = foods;
     }
 
     @NonNull
     @Override
     public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemFoodBinding binding = ItemFoodBinding.inflate(LayoutInflater.from(context), parent, false);
+        ItemFoodBinding binding = ItemFoodBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new FoodViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
-        food foodItem = foods.get(position);
-
-        holder.binding.foodImage.setImageResource(foodItem.getImage());
-        holder.binding.foodName.setText(foodItem.getName());
-        holder.binding.foodPrice.setText(foodItem.getPrice());
+        holder.bind(foods.get(position));
     }
 
     @Override
@@ -45,6 +39,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public FoodViewHolder(@NonNull ItemFoodBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public void bind(food foodItem) {
+            binding.foodImage.setImageResource(foodItem.getImage());
+            binding.foodName.setText(foodItem.getName());
+            binding.foodPrice.setText(foodItem.getPrice());
         }
     }
 }

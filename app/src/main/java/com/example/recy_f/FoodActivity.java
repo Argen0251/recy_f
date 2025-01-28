@@ -1,6 +1,9 @@
 package com.example.recy_f;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -47,5 +50,23 @@ public class FoodActivity extends AppCompatActivity {
         FoodAdapter foodAdapter = new FoodAdapter( foods);
         binding.foodRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.foodRecyclerView.setAdapter(foodAdapter);
+
+
+        binding.searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String food1 = charSequence.toString().trim();
+                if (!food1.isEmpty()) {
+                    foodAdapter.searchAndMoveToFirstPosition(food1);
+                    categoryAdapter.searchAndMoveToFirstPosition(food1);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
     }
 }

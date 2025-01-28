@@ -60,8 +60,8 @@ public class FoodActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String food1 = charSequence.toString().trim();
                 if (!food1.isEmpty()) {
-                    foodAdapter.searchAndMoveToFirstPosition(food1);
-                    categoryAdapter.searchAndMoveToFirstPosition(food1);
+                    foodAdapter.search(food1);
+                    categoryAdapter.search(food1);
                 }
             }
 

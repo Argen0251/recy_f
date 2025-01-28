@@ -31,7 +31,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     }
 
-    public void searchAndMoveToFirstPosition(String food1) {
+    public void search(String food1) {
         for (int i = 0; i < foods.size(); i++) {
             if (foods.get(i).getName().equalsIgnoreCase(food1)) {
                 moveToFirstPosition(i);

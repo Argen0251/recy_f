@@ -27,7 +27,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             notifyDataSetChanged();
         }
     }
-    public void searchAndMoveToFirstPosition(String cate1) {
+    public void search(String cate1) {
         for (int i = 0; i < categories.size(); i++) {
                 if (categories.get(i).getName().equalsIgnoreCase(cate1)) {
                 moveToFirstPosition(i);
